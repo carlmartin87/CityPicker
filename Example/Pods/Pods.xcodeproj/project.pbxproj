@@ -70,7 +70,6 @@
 		9187EEC2982DB82AD8D3A7001AA647D6 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2FEBA13C21B99B45C2553743F1295 /* NMBExceptionCapture.m */; };
 		9341B96D63EF6C54A1F906A1BBAEAF46 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D815E4D0509F64977CC911FFE53B202 /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9646787942A85613FE77F45794E9B5CD /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6249D63C7453302DA79EBB9E0440A1F9 /* BeginWith.swift */; };
-		99C9A2A31C9870120036AE1A /* countriesToCities.json in Resources */ = {isa = PBXBuildFile; fileRef = C64EBC101ADA0353FCE8F3D0C3E3B1FA /* countriesToCities.json */; };
 		9A6DE5B6F55232DC12497ED10E7E1DE4 /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EEC4AE3D10F56B3279410A932A7BA59 /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AFB25D3C2E4B568E3937E8E8FDC16A0 /* Nimble-Snapshots-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D707086D44E773A37529EEF12443BD /* Nimble-Snapshots-dummy.m */; };
 		9BD99F97E6F2B3811B56343F3505577C /* World+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDE1B04A94712F4D2883C80EE62D96 /* World+DSL.swift */; };
@@ -1051,7 +1050,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99C9A2A31C9870120036AE1A /* countriesToCities.json in Resources */,
 				625C82BCB9F0ED57875688AEF936C335 /* CityPicker.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

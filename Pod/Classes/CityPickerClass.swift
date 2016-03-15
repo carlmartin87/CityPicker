@@ -13,7 +13,7 @@ class cityPickerClass {
     
     
     
-    static func getNations() -> (nations:[String], allValues:NSDictionary){
+    class func getNations() -> (nations:[String], allValues:NSDictionary){
         
         
         var nations = [String]()
