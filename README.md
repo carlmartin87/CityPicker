@@ -28,5 +28,3 @@ salvonos, info@salvonostrato.com
 
 CityPicker is available under the MIT license. See the LICENSE file for more info.
 
-####Master branch build status: 
-![](https://travis-ci.org/salvonos/MovingHelper.svg?branch=master)
