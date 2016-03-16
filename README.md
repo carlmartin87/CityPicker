@@ -65,13 +65,39 @@ let cityPicker = CityPickerViewController()
 ```
 
 ```
-@IBAction func press(sender: AnyObject) {
+@IBAction func showCityPicker(sender: AnyObject) {
         
         self.cityPicker.showCityPicker(self, backgroundColor: UIColor.clearColor(), blurView_hidden: false)
 }
 ```
 
 ### Delegate ###
+
+The Delegate has 3 required functions. First add the `CityPickerViewControllerDelegate` in your class and you are ready to receive the selected values in your own class.
+
+##### CityPickerDidSelectRow:
+
+```
+func CityPickerDidSelectRow(nation: String, city: String) {
+        print("\(nation), \(city)")
+    }
+```
+
+##### CityPickerDidPressedCancelButton:
+
+```
+func CityPickerDidPressedCancelButton() {
+        print("canceled")
+    }
+```
+
+##### CityPickerDidPressedSelectButton
+
+```
+func CityPickerDidPressedSelectButton(CityPicker: CityPickerViewController, nation: String, city: String) {
+        cityLabel.text = "\(city), \(nation)"
+    }
+```
 
 ## Author
 
