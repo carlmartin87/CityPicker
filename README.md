@@ -3,7 +3,7 @@
 [![Language](https://img.shields.io/badge/Language-%20Swift%202.0%20-orange.svg)](http://cocoapods.org/pods/CityPicker)
 [![CI Status](http://img.shields.io/travis/salvonos/CityPicker.svg?style=flat)](https://travis-ci.org/salvonos/CityPicker)
 [![Version](https://img.shields.io/cocoapods/v/CityPicker.svg?style=flat)](http://cocoapods.org/pods/CityPicker)
-[![License](https://img.shields.io/cocoapods/l/CityPicker.svg?style=flat)](http://cocoapods.org/pods/CityPicker)
+[![Mit License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://cocoapods.org/pods/CityPicker)
 [![Platform](https://img.shields.io/cocoapods/p/CityPicker.svg?style=flat)](http://cocoapods.org/pods/CityPicker)
 
 ## Requirements
@@ -23,6 +23,18 @@ use_frameworks!
 
 pod "CityPicker"
 ```
+
+If you like to live on the bleeding edge, you can use the `master` branch with:
+
+```
+pod 'CityPicker', :git => 'https://github.com/salvonos/CityPicker'
+```
+
+### Manually
+
+1. Clone, add as a submodule or download
+2. Add all the files under `Classes` to your project.
+3. Enjoy.
 
 # Usage
 
@@ -58,6 +70,8 @@ let cityPicker = CityPickerViewController()
         self.cityPicker.showCityPicker(self, backgroundColor: UIColor.clearColor(), blurView_hidden: false)
 }
 ```
+
+### Delegate ###
 
 ## Author
 
