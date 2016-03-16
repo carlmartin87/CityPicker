@@ -1,4 +1,4 @@
-![](http://livectlab.com/git/head.png)
+![](http://livectlab.com/git/CityPicker/head.png)
 
 [![Language](https://img.shields.io/badge/Language-%20Swift%202.0%20-orange.svg)](http://cocoapods.org/pods/CityPicker)
 [![CI Status](http://img.shields.io/travis/salvonos/CityPicker.svg?style=flat)](https://travis-ci.org/salvonos/CityPicker)
@@ -23,7 +23,7 @@ pod "CityPicker"
 
 ## Author
 
-salvonos, info@salvonostrato.com
+Salvo Nostrato, info@salvonostrato.com
 
 ## License
 
