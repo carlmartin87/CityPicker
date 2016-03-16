@@ -11,6 +11,7 @@
 Swift 2.0
 iOS 8.0 +
 ```
+![](http://livectlab.com/git/CityPicker/citypicker.gif)
 
 # Installation with CocoaPods
 
