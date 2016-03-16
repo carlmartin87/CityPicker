@@ -1,4 +1,4 @@
-# CityPicker
+![](./img/head.jpg)
 
 [![Language](https://img.shields.io/badge/Language-%20Swift%202.0%20-orange.svg)](http://cocoapods.org/pods/CityPicker)
 [![CI Status](http://img.shields.io/travis/salvonos/CityPicker.svg?style=flat)](https://travis-ci.org/salvonos/CityPicker)
