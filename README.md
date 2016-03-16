@@ -106,7 +106,7 @@ func CityPickerDidPressedSelectButton(CityPicker: CityPickerViewController, nati
 * Support OS X
 * Convert UTF8 symbols in json List
 * Add missing cities
-----
+
 
 # Contact
 
