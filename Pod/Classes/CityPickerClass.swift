@@ -18,17 +18,18 @@ class cityPickerClass {
         
         var nations = [String]()
         var allValues = NSDictionary()
-        let podBundle = NSBundle(forClass: self)
+        let podBundle = Bundle(for: self)
         
-        if let path = podBundle.pathForResource("countriesToCities", ofType: "json") {
+        if let path = podBundle.path(forResource: "countriesToCities", ofType: "json") {
             
             do {
-                let jsonData = try NSData(contentsOfFile: path, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path) , options: Data.ReadingOptions.mappedIfSafe)
                 do {
-                    let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                    let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                     
                     let nationsArray = jsonResult.allKeys as! [String]
-                    let sortedNations = nationsArray.sort {  $0 < $1 }
+                    let sortedNations = nationsArray.sorted {  $0 < $1 }
                     
                     nations = sortedNations
                     

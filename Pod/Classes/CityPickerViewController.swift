@@ -9,27 +9,27 @@
 import UIKit
 
 public protocol CityPickerViewControllerDelegate: class {
-    func CityPickerDidSelectRow(nation: String, city: String)
+    func CityPickerDidSelectRow(_ nation: String, city: String)
     func CityPickerDidPressedCancelButton()
-    func CityPickerDidPressedSelectButton(CityPicker: CityPickerViewController ,nation: String, city: String)
+    func CityPickerDidPressedSelectButton(_ CityPicker: CityPickerViewController ,nation: String, city: String)
 }
 
 
 
 
-public class CityPickerViewResponder {
+open class CityPickerViewResponder {
     let CityPicker: CityPickerViewController
     
     // Initialisation
     public init(CityPicker: CityPickerViewController) {
         self.CityPicker = CityPicker
     }
-
-    public func close() {
+    
+    open func close() {
         self.CityPicker.hideView()
     }
     
-    public func setDismissBlock(dismissBlock: DismissBlock) {
+    open func setDismissBlock(_ dismissBlock: @escaping DismissBlock) {
         self.CityPicker.dismissBlock = dismissBlock
     }
 }
@@ -39,8 +39,8 @@ public typealias DismissBlock = () -> Void
 
 
 //MARK: The Main Class
-public class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     // Members declaration
     var baseView = UIView()
     var blurView = UIVisualEffectView()
@@ -50,19 +50,19 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     var cityLabel =  UILabel()
     var nationLabel =  UILabel()
     var dismissBlock : DismissBlock?
-    private var selfReference: CityPickerViewController?
+    fileprivate var selfReference: CityPickerViewController?
     
     
     // DELEGATE
-    public weak var delegate: CityPickerViewControllerDelegate! = nil
+    open weak var delegate: CityPickerViewControllerDelegate! = nil
     
     // ARRAYS
     var nations = cityPickerClass.getNations().nations
     var currentCities = [String]()
     
     // Options
-    var startingNation = "Italy"
-    var startingCity = "Rome"
+    var startingNation = "Germany"
+    var startingCity = "Berlin"
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -73,8 +73,8 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
         super.init(nibName:nil, bundle:nil)
         // Set up main view
         
-        view.frame = UIScreen.mainScreen().bounds
-        view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
+        view.frame = UIScreen.main.bounds
+        view.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
         view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:0.0)
         view.addSubview(baseView)
         // Base View
@@ -82,47 +82,47 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
         
         //visual effect view
         blurView.frame = view.frame
-        blurView.effect = UIBlurEffect(style: .Dark)
+        blurView.effect = UIBlurEffect(style: .dark)
         baseView.addSubview(blurView)
         
         // close button
-        closeBtn.frame = CGRectMake(10, 0, 50, 30)
+        closeBtn.frame = CGRect(x: 10, y: 0, width: 50, height: 30)
         closeBtn.layer.masksToBounds = true
-        closeBtn.setTitle("Cancel", forState: .Normal)
+        closeBtn.setTitle("Cancel", for: .normal)
         closeBtn.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-        closeBtn.contentHorizontalAlignment = .Left
-        closeBtn.addTarget(self, action: "closeCityPickerView:", forControlEvents: .TouchUpInside)
+        closeBtn.contentHorizontalAlignment = .left
+        closeBtn.addTarget(self, action: #selector(CityPickerViewController.closeCityPickerView(_:)), for: .touchUpInside)
         baseView.addSubview(closeBtn)
         
         // select button
-        selectBtn.frame = CGRectMake(baseView.frame.width - 60, 0, 50, 30)
+        selectBtn.frame = CGRect(x: baseView.frame.width - 60, y: 0, width: 50, height: 30)
         selectBtn.layer.masksToBounds = true
-        selectBtn.setTitle("Select", forState: .Normal)
+        selectBtn.setTitle("Select", for: .normal)
         selectBtn.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-        selectBtn.contentHorizontalAlignment = .Right
-        selectBtn.addTarget(self, action: "selectCityPickerView:", forControlEvents: .TouchUpInside)
+        selectBtn.contentHorizontalAlignment = .right
+        selectBtn.addTarget(self, action: #selector(CityPickerViewController.selectCityPickerView(_:)), for: .touchUpInside)
         baseView.addSubview(selectBtn)
         
         //title label
-        cityLabel.frame = CGRectMake(0, 0, baseView.frame.width - 120, 30)
+        cityLabel.frame = CGRect(x: 0, y: 0, width: baseView.frame.width - 120, height: 30)
         cityLabel.center.x = baseView.center.x
         cityLabel.text = startingCity
-        cityLabel.textAlignment = .Center
-        cityLabel.textColor = UIColor.lightGrayColor()
+        cityLabel.textAlignment = .center
+        cityLabel.textColor = UIColor.lightGray
         cityLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
         cityLabel.adjustsFontSizeToFitWidth = true
         cityLabel.minimumScaleFactor = 0.5
         baseView.addSubview(cityLabel)
         
         //nation label
-        nationLabel.frame = CGRectMake(0, 0, baseView.frame.width - 120, 30)
+        nationLabel.frame = CGRect(x: 0, y: 0, width: baseView.frame.width - 120, height: 30)
         nationLabel.center.x = baseView.center.x
         nationLabel.text = startingNation
         baseView.addSubview(nationLabel)
-        nationLabel.hidden = true
+        nationLabel.isHidden = true
         
         //picker view
-        cityPicker.frame = CGRectMake(0, 40, baseView.frame.width, baseView.frame.height - 40)
+        cityPicker.frame = CGRect(x: 0, y: 40, width: baseView.frame.width, height: baseView.frame.height - 40)
         baseView.addSubview(cityPicker)
         
         
@@ -132,13 +132,13 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
         
     }
     
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
     }
     
-    override public func viewWillLayoutSubviews() {
+    override open func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        let rv = UIApplication.sharedApplication().keyWindow! as UIWindow
+        let rv = UIApplication.shared.keyWindow! as UIWindow
         let sz = rv.frame.size
         
         // Set background frame
@@ -148,7 +148,7 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         //cityPicker.delegate = self
@@ -156,12 +156,12 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     }
     
     
-    override public func viewWillAppear(animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        callCities("Italy")
-        cityPicker.selectRow(108, inComponent: 0, animated: false)
-        cityPicker.selectRow(3398, inComponent: 1, animated: false)
+        callCities("Germany")
+        cityPicker.selectRow(82, inComponent: 0, animated: false)
+        cityPicker.selectRow(659, inComponent: 1, animated: false)
         
         cityPicker.reloadAllComponents()
         cityLabel.text = startingCity
@@ -169,7 +169,7 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
         
     }
     
-    public override func viewWillDisappear(animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         cityLabel.text?.removeAll()
@@ -177,15 +177,15 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     }
     
     // show view
-    public func showCityPicker(ViewController:UIViewController,backgroundColor:UIColor, blurView_hidden: Bool) -> CityPickerViewResponder{
+    open func showCityPicker(_ ViewController:UIViewController,backgroundColor:UIColor, blurView_hidden: Bool) -> CityPickerViewResponder{
         
         return showCityPickerView(ViewController,backgroundColor: backgroundColor,blurView_hidden: blurView_hidden)
         
     }
     
-    public func showCityPickerView(viewController:UIViewController, backgroundColor:UIColor, blurView_hidden: Bool) -> CityPickerViewResponder {
+    open func showCityPickerView(_ viewController:UIViewController, backgroundColor:UIColor, blurView_hidden: Bool) -> CityPickerViewResponder {
         selfReference = self
-        let rv = UIApplication.sharedApplication().keyWindow! as UIWindow
+        let rv = UIApplication.shared.keyWindow! as UIWindow
         //rv.addSubview(view)
         view.frame = rv.bounds
         baseView.frame = rv.bounds
@@ -193,10 +193,10 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
         
         
         baseView.backgroundColor = backgroundColor
-        blurView.hidden = blurView_hidden
+        blurView.isHidden = blurView_hidden
         
-        self.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-        viewController.presentViewController(selfReference!, animated: true, completion: nil)
+        self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        viewController.present(selfReference!, animated: true, completion: nil)
         
         
         
@@ -205,7 +205,7 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     
     //MARK: Select Button
     
-    func selectCityPickerView(sender: UIButton!) {
+    func selectCityPickerView(_ sender: UIButton!) {
         
         delegate?.CityPickerDidPressedSelectButton(self, nation: nationLabel.text!, city: cityLabel.text!)
         hideView()
@@ -213,50 +213,50 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     
     //MARK: Close CityPicker
     
-    func closeCityPickerView(sender: UIButton!) {
+    func closeCityPickerView(_ sender: UIButton!) {
         
         hideView()
         delegate?.CityPickerDidPressedCancelButton()
     }
     
-    public func hideView() {
-        UIView.animateWithDuration(0.2, animations: {
+    open func hideView() {
+        UIView.animate(withDuration: 0.2, animations: {
             self.view.alpha = 1
-            }, completion: { finished in
-                
-                if(self.dismissBlock != nil) {
-                    // Call completion handler when the alert is dismissed
-                    self.dismissBlock!()
-                }
-                
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
-                self.selfReference = nil
+        }, completion: { finished in
+            
+            if(self.dismissBlock != nil) {
+                // Call completion handler when the alert is dismissed
+                self.dismissBlock!()
+            }
+            
+            
+            self.dismiss(animated: true, completion: nil)
+            self.selfReference = nil
         })
     }
     
     
     
     //MARK: Main Functions
-    func callCities(_nation: String) {
+    func callCities(_ _nation: String) {
         
         let citiesArray = cityPickerClass.getNations().allValues[_nation] as! [String]
-        let sortedcities = citiesArray.sort {  $0 < $1 }
+        let sortedcities = citiesArray.sorted {  $0 < $1 }
         
         currentCities = sortedcities
         
     }
-
-
-
-
-//MARK: Extension Picker Delegate
-
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    
+    
+    
+    
+    //MARK: Extension Picker Delegate
+    
+    open func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    open func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         if component == 0 {
             
@@ -268,22 +268,22 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
         }
         
         
-    
+        
     }
     
     
-    public func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    open func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         
         
         
         if component == 0 {
             let titleData = nations[row]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 15.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 15.0)!,NSForegroundColorAttributeName:UIColor.white])
             return myTitle
         } else {
             
             let titleData = currentCities[row]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 15.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 15.0)!,NSForegroundColorAttributeName:UIColor.white])
             return myTitle
         }
         
@@ -291,26 +291,24 @@ public class CityPickerViewController: UIViewController, UIPickerViewDelegate, U
     
     
     
-    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+    open func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(row)
         if component == 0 {
             
             callCities(nations[row])
             cityPicker.reloadComponent(1)
-        
+            
         }
         
-        nationLabel.text = nations[pickerView.selectedRowInComponent(0)]
-        cityLabel.text = currentCities[pickerView.selectedRowInComponent(1)]
+        nationLabel.text = nations[pickerView.selectedRow(inComponent: 0)]
+        cityLabel.text = currentCities[pickerView.selectedRow(inComponent: 1)]
         
         delegate?.CityPickerDidSelectRow(nationLabel.text!,city: cityLabel.text!)
     }
     
     
     
-    override public func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+    
     
     
 }
