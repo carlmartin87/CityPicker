@@ -24,7 +24,7 @@ open class CityPickerViewResponder {
     public init(CityPicker: CityPickerViewController) {
         self.CityPicker = CityPicker
     }
-    
+
     open func close() {
         self.CityPicker.hideView()
     }
@@ -40,7 +40,7 @@ public typealias DismissBlock = () -> Void
 
 //MARK: The Main Class
 open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
     // Members declaration
     var baseView = UIView()
     var blurView = UIVisualEffectView()
@@ -222,16 +222,16 @@ open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIP
     open func hideView() {
         UIView.animate(withDuration: 0.2, animations: {
             self.view.alpha = 1
-        }, completion: { finished in
-            
-            if(self.dismissBlock != nil) {
-                // Call completion handler when the alert is dismissed
-                self.dismissBlock!()
-            }
-            
-            
-            self.dismiss(animated: true, completion: nil)
-            self.selfReference = nil
+            }, completion: { finished in
+                
+                if(self.dismissBlock != nil) {
+                    // Call completion handler when the alert is dismissed
+                    self.dismissBlock!()
+                }
+                
+                
+                self.dismiss(animated: true, completion: nil)
+                self.selfReference = nil
         })
     }
     
@@ -246,12 +246,12 @@ open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIP
         currentCities = sortedcities
         
     }
-    
-    
-    
-    
-    //MARK: Extension Picker Delegate
-    
+
+
+
+
+//MARK: Extension Picker Delegate
+
     open func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -268,7 +268,7 @@ open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIP
         }
         
         
-        
+    
     }
     
     
@@ -297,7 +297,7 @@ open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIP
             
             callCities(nations[row])
             cityPicker.reloadComponent(1)
-            
+        
         }
         
         nationLabel.text = nations[pickerView.selectedRow(inComponent: 0)]
@@ -308,7 +308,7 @@ open class CityPickerViewController: UIViewController, UIPickerViewDelegate, UIP
     
     
     
-    
+   
     
     
 }

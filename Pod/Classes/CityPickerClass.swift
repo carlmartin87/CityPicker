@@ -23,7 +23,7 @@ class cityPickerClass {
         if let path = podBundle.path(forResource: "countriesToCities", ofType: "json") {
             
             do {
-                
+              
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: path) , options: Data.ReadingOptions.mappedIfSafe)
                 do {
                     let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
